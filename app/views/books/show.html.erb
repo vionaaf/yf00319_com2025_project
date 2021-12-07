@@ -1,0 +1,29 @@
+<h2><%= @book.title %></h2>
+<h3><%= @book.author %></h3>
+<h4><b>Type:</b> <%= @book.category.name %></h4>
+<h5><%= @book.description %></h5>
+
+<div>
+	<div class="container">
+		<div>
+			<%= render @book.reviews %>
+		</div>
+	</div>
+	<div>
+		<%= link_to "Add Review", new_book_review_path(@book) %>
+	</div>
+</div>
+
+
+<%= link_to "Home", root_path %>
+
+<% if user_signed_in? %>
+
+	<% if @book.user_id == current_user.id %>
+
+		<%= link_to "Edit", edit_book_path(@book) %>
+		<%= link_to "Delete", book_path(@book), method: :delete %>
+
+	<% end %>
+
+<% end %>
